@@ -159,31 +159,31 @@ function App() {
     }
   };
 
-  const updateJobStatus = async (job) => {
-    try {
-      await axios.put(
-        `https://trackmyjob-geau.onrender.com/job-applications/${job.id}`,
-        {
-          company_name: job.company_name,
-          job_title: job.job_title,
-          location: job.location,
-          job_type: job.job_type,
-          status: "Interview Scheduled",
-          applied_date: job.applied_date,
-          job_link: job.job_link,
-          notes: job.notes,
-        }
-      );
+  const updateJobStatus = async (job, newStatus) => {
+  try {
+    await axios.put(
+      `https://trackmyjob-geau.onrender.com/job-applications/${job.id}`,
+      {
+        company_name: job.company_name,
+        job_title: job.job_title,
+        location: job.location,
+        job_type: job.job_type,
+        status: newStatus,
+        applied_date: job.applied_date,
+        job_link: job.job_link,
+        notes: job.notes,
+      }
+    );
 
-      alert("Job status updated successfully");
+    alert("Job status updated successfully");
 
-      fetchJobs();
-    } catch (error) {
-      console.log(error);
+    fetchJobs();
+  } catch (error) {
+    console.log(error);
 
-      alert("Failed to update status");
-    }
-  };
+    alert("Failed to update status");
+  }
+};
   const startEditJob = (job) => {
   setEditingJobId(job.id);
 
@@ -392,12 +392,28 @@ function App() {
             Delete
           </button>
 
-          <button
-            className="update-btn"
-            onClick={() => updateJobStatus(job)}
-          >
-            Update Status
-          </button>
+          <div className="status-buttons">
+  <button
+    className="update-btn"
+    onClick={() => updateJobStatus(job, "Interview Scheduled")}
+  >
+    Interview Scheduled
+  </button>
+
+  <button
+    className="update-btn"
+    onClick={() => updateJobStatus(job, "Rejected")}
+  >
+    Rejected
+  </button>
+
+  <button
+    className="update-btn"
+    onClick={() => updateJobStatus(job, "Offer Received")}
+  >
+    Offer Received
+  </button>
+</div>
 
           <button onClick={() => startEditJob(job)}>
            Edit

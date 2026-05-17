@@ -228,7 +228,7 @@ function App() {
           <p>{interviewJobs}</p>
         </div>
 
-        <div className="dashboard-card">
+        <div className="stat-card">
                 <h3>Offer Received</h3>
             <p>{offerReceivedJobs}</p>
             </div>

@@ -40,6 +40,10 @@ function App() {
     (job) => job.status === "Rejected"
   ).length;
 
+  const offerReceivedJobs = jobs.filter(
+  (job) => job.status === "Offer Received"
+).length;
+
   const chartData = [
   {
     status: "Applied",
@@ -52,6 +56,10 @@ function App() {
   {
     status: "Rejected",
     count: rejectedJobs,
+  },
+  {
+    status: "Offer",
+    count: offerReceivedJobs,
   },
 ];
 
@@ -219,6 +227,11 @@ function App() {
           <h3>Interview Scheduled</h3>
           <p>{interviewJobs}</p>
         </div>
+
+        <div className="dashboard-card">
+          <h3>Offer Received</h3>
+          <p>{offerReceivedJobs}</p>
+         </div>
 
         <div className="stat-card">
           <h3>Rejected</h3>

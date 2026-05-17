@@ -77,7 +77,7 @@ function App() {
     try {
       if (editingJobId) {
   const response = await axios.put(
-    `http://localhost:5001/job-applications/${editingJobId}`,
+    `https://trackmyjob-geau.onrender.com/job-applications/${editingJobId}`,
     {
       company_name: companyName,
       job_title: jobTitle,
@@ -97,7 +97,7 @@ function App() {
   setEditingJobId(null);
 } else {
   const response = await axios.post(
-    "http://localhost:5001/job-applications",
+    "https://trackmyjob-geau.onrender.com/job-applications",
     {
       company_name: companyName,
       job_title: jobTitle,
@@ -134,7 +134,7 @@ function App() {
   const fetchJobs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5001/job-applications"
+        "https://trackmyjob-geau.onrender.com/job-applications"
       );
 
       setJobs(response.data);
@@ -146,7 +146,7 @@ function App() {
   const deleteJob = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5001/job-applications/${id}`
+        `https://trackmyjob-geau.onrender.com/job-applications/${id}`
       );
 
       alert("Job application deleted successfully");
@@ -162,7 +162,7 @@ function App() {
   const updateJobStatus = async (job) => {
     try {
       await axios.put(
-        `http://localhost:5001/job-applications/${job.id}`,
+        `https://trackmyjob-geau.onrender.com/job-applications/${job.id}`,
         {
           company_name: job.company_name,
           job_title: job.job_title,

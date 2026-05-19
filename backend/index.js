@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -11,10 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 client.connect()
@@ -24,6 +27,106 @@ client.connect()
   .catch((err) => {
     console.log("Database connection error", err);
   });
+
+  app.post("/register", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const result = await client.query(
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
+      [name, email, hashedPassword]
+    );
+
+    res.status(201).json({
+      message: "User registered successfully",
+      user: result.rows[0],
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Registration failed",
+    });
+  }
+});
+
+
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const result = await client.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+
+    const user = result.rows[0];
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(400).json({
+        message: "Invalid password",
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      "mysecretkey",
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    res.status(200).json({
+      message: "Login successful",
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Login failed",
+    });
+  }
+});
+
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({
+      message: "Access denied. No token provided.",
+    });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, "mysecretkey");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({
+      message: "Invalid or expired token",
+    });
+  }
+};
 
 app.get("/", (req, res) => {
   res.send("TrackMyJob backend is running");
@@ -140,7 +243,7 @@ app.delete("/users/:id", async (req, res) => {
   }
 });
 
-app.get("/job-applications", async (req, res) => {
+app.get("/job-applications", verifyToken, async (req, res) => {
   try {
     const result = await client.query(
       "SELECT * FROM job_applications"

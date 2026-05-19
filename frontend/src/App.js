@@ -25,7 +25,57 @@ function App() {
 
   const [statusFilter, setStatusFilter] = useState("All");
   const [editingJobId, setEditingJobId] = useState(null);
+  const [isLoginMode, setIsLoginMode] = useState(true);
+const [authName, setAuthName] = useState("");
+const [authEmail, setAuthEmail] = useState("");
+const [authPassword, setAuthPassword] = useState("");
+const [token, setToken] = useState(localStorage.getItem("token") || "");
 
+const handleAuth = async (e) => {
+  e.preventDefault();
+
+  try {
+    const endpoint = isLoginMode ? "login" : "register";
+
+    const payload = isLoginMode
+      ? {
+          email: authEmail,
+          password: authPassword,
+        }
+      : {
+          name: authName,
+          email: authEmail,
+          password: authPassword,
+        };
+
+    const response = await axios.post(
+      `http://localhost:5001/${endpoint}`,
+      payload
+    );
+
+    if (isLoginMode) {
+      localStorage.setItem("token", response.data.token);
+
+      setToken(response.data.token);
+
+      alert("Login successful");
+
+      fetchJobs(response.data.token);
+    } else {
+      alert("Registration successful");
+
+      setIsLoginMode(true);
+    }
+  } catch (error) {
+    console.log(error);
+
+    alert(
+      isLoginMode
+        ? "Login failed"
+        : "Registration failed"
+    );
+  }
+};
   const totalJobs = jobs.length;
 
   const appliedJobs = jobs.filter(
@@ -207,8 +257,71 @@ function App() {
   useEffect(() => {
     fetchJobs();
   }, []);
+if (!token) {
+  return (
+    <div className="container">
+      <h1>{isLoginMode ? "Login" : "Register"}</h1>
+
+      <form onSubmit={handleAuth}>
+        {!isLoginMode && (
+          <div>
+            <label>Name:</label>
+
+            <input
+              type="text"
+              value={authName}
+              onChange={(e) => setAuthName(e.target.value)}
+            />
+          </div>
+        )}
+
+        <br />
+
+        <div>
+          <label>Email:</label>
+
+          <input
+            type="email"
+            value={authEmail}
+            onChange={(e) => setAuthEmail(e.target.value)}
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Password:</label>
+
+          <input
+            type="password"
+            value={authPassword}
+            onChange={(e) => setAuthPassword(e.target.value)}
+          />
+        </div>
+
+        <br />
+
+        <button type="submit">
+          {isLoginMode ? "Login" : "Register"}
+        </button>
+
+        <br />
+        <br />
+
+        <button
+          type="button"
+          onClick={() => setIsLoginMode(!isLoginMode)}
+        >
+          Switch to {isLoginMode ? "Register" : "Login"}
+        </button>
+      </form>
+    </div>
+  );
+}
 
   return (
+
+    
     <div className="container">
       <h1>TrackMyJob</h1>
 

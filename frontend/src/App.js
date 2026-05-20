@@ -319,7 +319,12 @@ if (!token) {
 
         <button
           type="button"
-          onClick={() => setIsLoginMode(!isLoginMode)}
+          onClick={() => {
+  setIsLoginMode(!isLoginMode);
+  setAuthName("");
+  setAuthEmail("");
+  setAuthPassword("");
+}}
         >
           Switch to {isLoginMode ? "Register" : "Login"}
         </button>
@@ -334,10 +339,13 @@ if (!token) {
     <div className="container">
       <h1>TrackMyJob</h1>
 
-      <button
+     <button
   onClick={() => {
     localStorage.removeItem("token");
     setToken("");
+    setAuthName("");
+    setAuthEmail("");
+    setAuthPassword("");
   }}
 >
   Logout

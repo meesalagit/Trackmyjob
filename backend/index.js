@@ -321,7 +321,7 @@ app.post("/job-applications", verifyToken, async (req, res) => {
     });
   }
 });
-app.put("/job-applications/:id", async (req, res) => {
+app.put("/job-applications/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -346,7 +346,7 @@ app.put("/job-applications/:id", async (req, res) => {
            applied_date = $6,
            job_link = $7,
            notes = $8
-       WHERE id = $9
+       WHERE id = $9 AND user_id = $10
        RETURNING *`,
       [
         company_name,
@@ -358,6 +358,7 @@ app.put("/job-applications/:id", async (req, res) => {
         job_link,
         notes,
         id,
+        req.user.id,
       ]
     );
 
@@ -374,13 +375,13 @@ app.put("/job-applications/:id", async (req, res) => {
     });
   }
 });
-app.delete("/job-applications/:id", async (req, res) => {
+app.delete("/job-applications/:id", verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
 
     const result = await client.query(
-      "DELETE FROM job_applications WHERE id = $1 RETURNING *",
-      [id]
+      "DELETE FROM job_applications WHERE id = $1 AND user_id = $2 RETURNING *",
+[id, req.user.id]
     );
 
     if (result.rows.length === 0) {

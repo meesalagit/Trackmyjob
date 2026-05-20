@@ -259,7 +259,7 @@ const handleAuth = async (e) => {
   setNotes(job.notes);
 };
 
-  useEffect(() => {
+useEffect(() => {
   if (token) {
     fetchJobs(token);
   }

@@ -119,7 +119,9 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, "mysecretkey");
+
     req.user = decoded;
+
     next();
   } catch (error) {
     res.status(401).json({
@@ -246,7 +248,8 @@ app.delete("/users/:id", async (req, res) => {
 app.get("/job-applications", verifyToken, async (req, res) => {
   try {
     const result = await client.query(
-      "SELECT * FROM job_applications"
+      "SELECT * FROM job_applications WHERE user_id = $1 ORDER BY id DESC",
+      [req.user.id]
     );
 
     res.json(result.rows);

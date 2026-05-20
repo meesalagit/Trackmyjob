@@ -342,20 +342,23 @@ if (!token) {
 
     
     <div className="container">
-      <h1>TrackMyJob</h1>
+      <div className="navbar">
+  <h1>TrackMyJob</h1>
 
-     <button
-  onClick={() => {
-    localStorage.removeItem("token");
+  <button
+    className="logout-btn"
+    onClick={() => {
+      localStorage.removeItem("token");
       setToken("");
       setJobs([]);
-        setAuthName("");
-        setAuthEmail("");
-        setAuthPassword("");
-  }}
->
-  Logout
-</button>
+      setAuthName("");
+      setAuthEmail("");
+      setAuthPassword("");
+    }}
+  >
+    Logout
+  </button>
+</div>
 
       <div className="dashboard">
         <div className="stat-card">

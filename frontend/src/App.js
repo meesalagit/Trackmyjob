@@ -189,17 +189,22 @@ const handleAuth = async (e) => {
     }
   };
 
-  const fetchJobs = async () => {
-    try {
-      const response = await axios.get(
-        "https://trackmyjob-geau.onrender.com/job-applications"
-      );
+  const fetchJobs = async (authToken = token) => {
+  try {
+    const response = await axios.get(
+      "https://trackmyjob-geau.onrender.com/job-applications",
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
 
-      setJobs(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    setJobs(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   const deleteJob = async (id) => {
     try {
@@ -255,8 +260,12 @@ const handleAuth = async (e) => {
 };
 
   useEffect(() => {
-    fetchJobs();
-  }, []);
+  if (token) {
+    fetchJobs(token);
+  }
+}, [token]);
+
+
 if (!token) {
   return (
     <div className="container">

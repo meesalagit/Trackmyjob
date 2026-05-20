@@ -48,10 +48,10 @@ const handleAuth = async (e) => {
           password: authPassword,
         };
 
-    const response = await axios.post(
-      `http://localhost:5001/${endpoint}`,
-      payload
-    );
+   const response = await axios.post(
+  `https://trackmyjob-geau.onrender.com/${endpoint}`,
+  payload
+);
 
     if (isLoginMode) {
       localStorage.setItem("token", response.data.token);

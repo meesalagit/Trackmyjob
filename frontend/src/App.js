@@ -334,6 +334,15 @@ if (!token) {
     <div className="container">
       <h1>TrackMyJob</h1>
 
+      <button
+  onClick={() => {
+    localStorage.removeItem("token");
+    setToken("");
+  }}
+>
+  Logout
+</button>
+
       <div className="dashboard">
         <div className="stat-card">
           <h3>Total Applications</h3>

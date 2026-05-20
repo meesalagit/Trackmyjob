@@ -281,7 +281,7 @@ app.get("/job-applications/:id", async (req, res) => {
     });
   }
 });
-app.post("/job-applications", async (req, res) => {
+app.post("/job-applications", verifyToken, async (req, res) => {
   try {
     const {
       company_name,
@@ -294,16 +294,10 @@ app.post("/job-applications", async (req, res) => {
       notes,
     } = req.body;
 
-    if (!company_name || !job_title || !status) {
-      return res.status(400).json({
-        error: "Company name, job title, and status are required",
-      });
-    }
-
     const result = await client.query(
-      `INSERT INTO job_applications 
-      (company_name, job_title, location, job_type, status, applied_date, job_link, notes)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `INSERT INTO job_applications
+      (company_name, job_title, location, job_type, status, applied_date, job_link, notes, user_id)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
       RETURNING *`,
       [
         company_name,
@@ -314,13 +308,16 @@ app.post("/job-applications", async (req, res) => {
         applied_date,
         job_link,
         notes,
+        req.user.id,
       ]
     );
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
+    console.log(err);
+
     res.status(500).json({
-      error: "Failed to create job application",
+      error: "Failed to add job application",
     });
   }
 });

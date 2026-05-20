@@ -189,13 +189,15 @@ const handleAuth = async (e) => {
     }
   };
 
-  const fetchJobs = async (authToken = token) => {
+  const fetchJobs = async () => {
   try {
+    const savedToken = localStorage.getItem("token");
+
     const response = await axios.get(
       "https://trackmyjob-geau.onrender.com/job-applications",
       {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${savedToken}`,
         },
       }
     );
@@ -260,10 +262,8 @@ const handleAuth = async (e) => {
 };
 
 useEffect(() => {
-  if (token) {
-    fetchJobs(token);
-  }
-}, [token]);
+  fetchJobs();
+}, []);
 
 
 if (!token) {

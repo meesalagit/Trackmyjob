@@ -262,7 +262,12 @@ const handleAuth = async (e) => {
 };
 
 useEffect(() => {
-  fetchJobs();
+  const savedToken = localStorage.getItem("token");
+
+  if (savedToken) {
+    setToken(savedToken);
+    fetchJobs();
+  }
 }, []);
 
 
@@ -320,11 +325,11 @@ if (!token) {
         <button
           type="button"
           onClick={() => {
-  setIsLoginMode(!isLoginMode);
-  setAuthName("");
-  setAuthEmail("");
-  setAuthPassword("");
-}}
+          setIsLoginMode(!isLoginMode);
+          setAuthName("");
+          setAuthEmail("");
+          setAuthPassword("");
+          }}
         >
           Switch to {isLoginMode ? "Register" : "Login"}
         </button>
@@ -342,10 +347,11 @@ if (!token) {
      <button
   onClick={() => {
     localStorage.removeItem("token");
-    setToken("");
-    setAuthName("");
-    setAuthEmail("");
-    setAuthPassword("");
+      setToken("");
+      setJobs([]);
+        setAuthName("");
+        setAuthEmail("");
+        setAuthPassword("");
   }}
 >
   Logout

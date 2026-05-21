@@ -10,32 +10,31 @@ TrackMyJob AI is a modern full-stack job application tracking platform that help
 
 ## Landing Page
 
-![Landing Page](./public/screenshots/landing.png)
+![Landing Page](./frontend/public/screenshots/landing.png)
 
 ---
 
 ## Login Page
 
-![Login Page](./public/screenshots/login.png)
+![Login Page](./frontend/public/screenshots/login.png)
 
 ---
 
 ## Dashboard Overview
 
-![Dashboard Overview](./public/screenshots/dashboard-overview.png)
+![Dashboard Overview](./frontend/public/screenshots/dashboard-overview.png)
 
 ---
 
 ## Add Job Form
 
-![Dashboard Form](./public/screenshots/dashboard-form.png)
+![Dashboard Form](./frontend/public/screenshots/dashboard-form.png)
 
 ---
 
 ## Analytics Dashboard
 
-![Dashboard Analytics](./public/screenshots/dashboard-analytics.png)
-
+![Dashboard Analytics](./frontend/public/screenshots/dashboard-analytic.png)
 ---
 
 # ✨ Features

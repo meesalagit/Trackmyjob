@@ -335,22 +335,6 @@ if (showLanding && !token) {
             Start Tracking Now
           </button>
         </div>
-
-        <div className="hero-preview-card">
-          <h3>Application Dashboard</h3>
-          <div className="preview-row">
-          <span>Total Applications</span>
-            <strong>0</strong>
-            </div>
-              <div className="preview-row">
-              <span>Interviews</span>
-              <strong>0</strong>
-              </div>
-              <div className="preview-row">
-              <span>Offers</span>
-              <strong>0</strong>
-              </div>
-        </div>
       </section>
       <section className="features-section">
 

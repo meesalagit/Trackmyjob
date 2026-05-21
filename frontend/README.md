@@ -1,70 +1,234 @@
-# Getting Started with Create React App
+# TrackMyJob AI 📋
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TrackMyJob AI is a modern full-stack job application tracking platform that helps users organize, monitor, and manage their entire job search process in one centralized dashboard.
 
-## Available Scripts
+🔗 **Live Demo:** https://trackmyjob-wine.vercel.app
 
-In the project directory, you can run:
+---
 
-### `npm start`
+# 📸 Screenshots
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Landing Page
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Landing Page](./public/screenshots/landing.png)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Login Page
 
-### `npm run build`
+![Login Page](./public/screenshots/login.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Dashboard Overview
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Dashboard Overview](./public/screenshots/dashboard-overview.png)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Add Job Form
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Dashboard Form](./public/screenshots/dashboard-form.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Analytics Dashboard
 
-## Learn More
+![Dashboard Analytics](./public/screenshots/dashboard-analytics.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# ✨ Features
 
-### Code Splitting
+- Secure JWT-based Authentication System
+- User Registration and Login Functionality
+- Protected Dashboard Routes
+- Add, Edit, Delete Job Applications
+- Real-Time Application Status Tracking
+- Search and Filter Job Applications
+- Interactive Analytics Dashboard using Recharts
+- SaaS-style Responsive Landing Page
+- REST API Integration with Axios
+- PostgreSQL Database Connectivity
+- Error Handling and Loading States
+- Fully Responsive UI Design
+- Cloud Deployment using Vercel and Render
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+# 🛠️ Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Frontend
 
-### Making a Progressive Web App
+| Technology | Purpose |
+|------------|---------|
+| React.js | Frontend UI Development |
+| JavaScript (ES6+) | Core Programming Language |
+| CSS3 | Styling & Responsive Design |
+| Axios | API Communication |
+| Recharts | Analytics & Data Visualization |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Technology | Purpose |
+|------------|---------|
+| Node.js | Server Runtime Environment |
+| Express.js | Backend API Framework |
+| PostgreSQL | Relational Database |
+| JWT | Secure Authentication |
+| bcrypt | Password Hashing & Security |
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Deployment & Tools
 
-### `npm run build` fails to minify
+| Technology | Purpose |
+|------------|---------|
+| Git & GitHub | Version Control |
+| Vercel | Frontend Deployment |
+| Render | Backend Deployment |
+| Postman | API Testing |
+| REST APIs | Client-Server Communication |
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 🚀 Getting Started
+
+## Prerequisites
+
+- Node.js v18+
+- PostgreSQL
+- npm
+
+---
+
+## Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/meesalagit/Trackmyjob.git
+cd Trackmyjob
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Create `.env` file inside backend:
+
+```env
+PORT=5000
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_secret_key
+```
+
+Run backend:
+
+```bash
+npm start
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+Run frontend:
+
+```bash
+npm start
+```
+
+---
+
+Open browser:
+
+```bash
+http://localhost:3000
+```
+
+---
+
+# 📁 Project Structure
+
+```bash
+Trackmyjob/
+│
+├── backend/
+│   ├── index.js
+│   ├── package.json
+│
+├── frontend/
+│   ├── public/
+│   │   └── screenshots/
+│   │
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── App.css
+│   │
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+# 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/register` | Register new user |
+| POST | `/login` | Login user |
+| GET | `/job-applications` | Get all job applications |
+| POST | `/job-applications` | Add new application |
+| PUT | `/job-applications/:id` | Update application |
+| DELETE | `/job-applications/:id` | Delete application |
+
+---
+
+# 🎯 Technical Highlights
+
+- Full-stack application using React, Node.js, Express.js, and PostgreSQL
+- Secure JWT authentication with protected routes
+- Real-time dashboard analytics and visual charts
+- Full CRUD functionality for job application management
+- Modern responsive SaaS-style UI
+- RESTful API integration between frontend and backend
+- Live cloud deployment using Vercel and Render
+
+---
+
+# 🔮 Future Enhancements
+
+- AI Resume Analyzer
+- Resume ATS Score Checker
+- Email Notifications
+- Interview Reminder System
+- Dark/Light Theme Toggle
+- Advanced Analytics Dashboard
+
+---
+
+# 👨‍💻 Author
+
+**Tulasi Surendranath Meesala**
+
+- LinkedIn: https://www.linkedin.com/in/tulasi-surendranath-meesala-b20808214
+- GitHub: https://github.com/meesalagit
+
+---
+
+# 📄 License
+
+This project is open source and available under the MIT License.

@@ -30,12 +30,15 @@ const [authName, setAuthName] = useState("");
 const [authEmail, setAuthEmail] = useState("");
 const [authPassword, setAuthPassword] = useState("");
 const [authError, setAuthError] = useState("");
+const [authLoading, setAuthLoading] = useState(false);
 const [token, setToken] = useState(localStorage.getItem("token") || "");
 
 const [showLanding, setShowLanding] = useState(true);
 
 const handleAuth = async (e) => {
   e.preventDefault();
+
+  setAuthLoading(true);
 
   try {
     const endpoint = isLoginMode ? "login" : "register";
@@ -83,6 +86,9 @@ const handleAuth = async (e) => {
   } else {
     setAuthError("Registration failed. Please try again.");
   }
+}
+finally {
+  setAuthLoading(false);
 }
 };
   const totalJobs = jobs.length;
@@ -435,9 +441,13 @@ if (!token) {
 
         <br />
 
-        <button type="submit">
-          {isLoginMode ? "Login" : "Register"}
-        </button>
+        <button type="submit" disabled={authLoading}>
+            {authLoading
+               ? "Please wait..."
+             : isLoginMode
+             ? "Login"
+               : "Register"}
+              </button>
 
         <br />
         <br />

@@ -62,10 +62,13 @@ const handleAuth = async (e) => {
 
       fetchJobs(response.data.token);
     } else {
-      alert("Registration successful");
+  alert("Registration successful");
 
-      setIsLoginMode(true);
-    }
+  setAuthName("");
+  setAuthEmail("");
+  setAuthPassword("");
+  setIsLoginMode(true);
+}
   } catch (error) {
     console.log(error);
 
@@ -510,6 +513,13 @@ if (!token) {
 </BarChart>
 
       <h2>Job Applications</h2>
+
+          {filteredJobs.length === 0 && (
+  <div className="empty-state">
+    <h3>No job applications found</h3>
+    <p>Add your first job application to start tracking your progress.</p>
+  </div>
+)}
 
       {filteredJobs.map((job) => (
         <div key={job.id} className="job-card">

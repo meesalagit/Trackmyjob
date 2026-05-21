@@ -285,6 +285,45 @@ useEffect(() => {
   }
 }, []);
 
+useEffect(() => {
+  if (!token) return;
+
+  let lastActivity = Date.now();
+
+  const updateActivity = () => {
+    lastActivity = Date.now();
+  };
+
+  const checkInactivity = setInterval(() => {
+    const inactiveTime = Date.now() - lastActivity;
+
+    if (inactiveTime >= 3 * 60 * 1000) {
+      localStorage.removeItem("token");
+      setToken("");
+      setJobs([]);
+      setShowLanding(true);
+
+      alert("Session expired. Logged out automatically.");
+
+      clearInterval(checkInactivity);
+    }
+  }, 1000);
+
+  window.addEventListener("mousemove", updateActivity);
+  window.addEventListener("keydown", updateActivity);
+  window.addEventListener("click", updateActivity);
+  window.addEventListener("scroll", updateActivity);
+
+  return () => {
+    clearInterval(checkInactivity);
+
+    window.removeEventListener("mousemove", updateActivity);
+    window.removeEventListener("keydown", updateActivity);
+    window.removeEventListener("click", updateActivity);
+    window.removeEventListener("scroll", updateActivity);
+  };
+}, [token]);
+
 if (showLanding && !token) {
   return (
     <div className="landing-page">

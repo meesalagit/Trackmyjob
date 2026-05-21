@@ -29,6 +29,7 @@ function App() {
 const [authName, setAuthName] = useState("");
 const [authEmail, setAuthEmail] = useState("");
 const [authPassword, setAuthPassword] = useState("");
+const [authError, setAuthError] = useState("");
 const [token, setToken] = useState(localStorage.getItem("token") || "");
 
 const [showLanding, setShowLanding] = useState(true);
@@ -72,14 +73,17 @@ const handleAuth = async (e) => {
   setIsLoginMode(true);
 }
   } catch (error) {
-    console.log(error);
+  console.log(error);
 
-    alert(
-      isLoginMode
-        ? "Login failed"
-        : "Registration failed"
-    );
+  if (isLoginMode) {
+    setAuthError("Email or password is incorrect");
+
+    setAuthEmail("");
+    setAuthPassword("");
+  } else {
+    setAuthError("Registration failed. Please try again.");
   }
+}
 };
   const totalJobs = jobs.length;
 
@@ -385,6 +389,12 @@ if (!token) {
              ← Back to Home
             </button>
       <h1>{isLoginMode ? "Login" : "Register"}</h1>
+
+      {authError && (
+        <div className="auth-error">
+           {authError}
+        </div>
+        )}
 
       <form onSubmit={handleAuth}>
         {!isLoginMode && (

@@ -501,3 +501,14 @@ html {
 section {
   animation: fadeUp 0.8s ease;
 }
+
+.auth-error {
+  background: rgba(255, 0, 0, 0.12);
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  color: #ff4d4f;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  text-align: center;
+  font-weight: 600;
+}

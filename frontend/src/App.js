@@ -31,6 +31,8 @@ const [authEmail, setAuthEmail] = useState("");
 const [authPassword, setAuthPassword] = useState("");
 const [token, setToken] = useState(localStorage.getItem("token") || "");
 
+const [showLanding, setShowLanding] = useState(true);
+
 const handleAuth = async (e) => {
   e.preventDefault();
 
@@ -273,10 +275,115 @@ useEffect(() => {
   }
 }, []);
 
+if (showLanding && !token) {
+  return (
+    <div className="landing-page">
+      <nav className="landing-nav">
+        <h2>TrackMyJob</h2>
+
+        <div>
+          <button
+            className="nav-link-btn"
+            onClick={() => {
+              setShowLanding(false);
+              setIsLoginMode(true);
+            }}
+          >
+            Sign In
+          </button>
+
+          <button
+            className="nav-primary-btn"
+            onClick={() => {
+              setShowLanding(false);
+              setIsLoginMode(false);
+            }}
+          >
+            Get Started
+          </button>
+        </div>
+      </nav>
+
+      <section className="hero-section">
+        <div className="hero-content">
+          <span className="hero-badge">AI-Powered Job Tracking</span>
+
+          <h1>Track smarter. Apply faster. Stay organized.</h1>
+
+          <p>
+            Manage applications, monitor interview progress, and stay focused on
+            landing your next opportunity — all in one clean dashboard.
+          </p>
+
+          <button
+            className="hero-btn"
+            onClick={() => {
+              setShowLanding(false);
+              setIsLoginMode(false);
+            }}
+          >
+            Start Tracking Now
+          </button>
+        </div>
+
+        <div className="hero-preview-card">
+          <h3>Application Dashboard</h3>
+          <div className="preview-row">
+          <span>Total Applications</span>
+            <strong>0</strong>
+            </div>
+              <div className="preview-row">
+              <span>Interviews</span>
+              <strong>0</strong>
+              </div>
+              <div className="preview-row">
+              <span>Offers</span>
+              <strong>0</strong>
+              </div>
+        </div>
+      </section>
+      <section className="features-section">
+
+  <div className="feature-card">
+    <h3>Track Applications</h3>
+
+    <p>
+      Organize all your applications in one smart dashboard.
+    </p>
+  </div>
+
+  <div className="feature-card">
+    <h3>Interview Management</h3>
+
+    <p>
+      Track interviews, follow-ups, and hiring progress easily.
+    </p>
+  </div>
+
+  <div className="feature-card">
+    <h3>Analytics Dashboard</h3>
+
+    <p>
+      Monitor offers, rejections, and application statistics.
+    </p>
+  </div>
+
+</section>
+    </div>
+  );
+}
+
+
 
 if (!token) {
   return (
     <div className="container">
+
+      <button
+      className="back-home-btn"
+        onClick={() => setShowLanding(true)}>
+             ← Back to Home
+            </button>
       <h1>{isLoginMode ? "Login" : "Register"}</h1>
 
       <form onSubmit={handleAuth}>

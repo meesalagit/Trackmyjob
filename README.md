@@ -49,6 +49,7 @@ TrackMyJob AI is a modern full-stack job application tracking platform that help
 - SaaS-style Responsive Landing Page
 - REST API Integration with Axios
 - PostgreSQL Database Connectivity
+- Automatic Session Timeout & Auto Logout after Inactivity
 - Error Handling and Loading States
 - Fully Responsive UI Design
 - Cloud Deployment using Vercel and Render

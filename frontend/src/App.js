@@ -513,29 +513,26 @@ if (!token) {
 
       {filteredJobs.map((job) => (
         <div key={job.id} className="job-card">
-          <p>
-            <strong>Company:</strong> {job.company_name}
-          </p>
+
+
+         <h2 className="company-title">{job.company_name}</h2>
+
+
+          <h3 className="job-title">{job.job_title}</h3>
 
           <p>
-            <strong>Job Title:</strong> {job.job_title}
-          </p>
+          <strong>Status:</strong>{" "}
+          <span className={`status-badge ${job.status.replaceAll(" ", "-").toLowerCase()}`}>
+             {job.status}
+            </span>
+            </p>
 
-          <p>
-            <strong>Status:</strong> {job.status}
-          </p>
+          <p className="job-info">📍 {job.location}</p>
 
-          <p>
-            <strong>Location:</strong> {job.location}
-          </p>
+        <p className="job-info">💼 {job.job_type}</p>
 
-          <p>
-            <strong>Job Type:</strong> {job.job_type}
-          </p>
-
-          <p>
-            <strong>Applied Date:</strong>{" "}
-            {job.applied_date ? job.applied_date.slice(0, 10) : ""}
+         <p className="job-info">
+           📅 {job.applied_date ? job.applied_date.slice(0, 10) : ""}
           </p>
 
           <p>
